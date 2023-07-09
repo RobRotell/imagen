@@ -1,0 +1,56 @@
+{
+	"name": "imagen",
+	"version": "0.0.1",
+	"description": "SPA for generating images through OpenAI",
+	"main": "app.js",
+	"scripts": {
+		"server:dev": "NODE_OPTIONS='--experimental-specifier-resolution=node' nodemon ./bin/www.js",
+		"parcel:build": "parcel build src/frontend/index.html",
+		"parcel:dev": "parcel src/frontend/index.html --port 59049 --hmr-port 59049"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/RobRotell/imagen.git"
+	},
+	"author": "Rob Rotell",
+	"license": "AGPL-3.0-or-later",
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/RobRotell/imagen/issues"
+	},
+	"homepage": "https://github.com/RobRotell/imagen#readme",
+	"source": "src/frontend/index.html",
+	"targets": {
+		"default": {
+			"distDir": "./public",
+			"outputFormat": "global",
+			"context": "browser"
+		},
+		"app-js": {
+			"source": "./src/frontend/js/app.js",
+			"distDir": "./public/dist"
+		},
+		"app-css": {
+			"source": "./src/frontend/scss/app.scss",
+			"distDir": "./public/dist"
+		}
+	},
+	"dependencies": {
+		"alpinejs": "^3.12.3",
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"helmet": "^7.0.0",
+		"morgan": "^1.10.0",
+		"normalize.css": "^8.0.1"
+	},
+	"devDependencies": {
+		"@prisma/client": "^4.16.2",
+		"eslint": "^8.44.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-plugin-import": "^2.27.5",
+		"nodemon": "^3.0.0",
+		"parcel": "^2.9.3"
+	}
+}
