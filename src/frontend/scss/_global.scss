@@ -1,8 +1,9 @@
-@import 'npm:normalize.css/normalize.css';
+@use 'npm:normalize.css/normalize.css';
+
 
 @font-face {
 	font-display: swap;
-	font-family: 'Outfit';
+	font-family: $baseFontFamily;
 	font-style: normal;
 	font-weight: 300;
 	src: url('../fonts/outfit-v11-latin-300.woff2') format('woff2');
@@ -10,21 +11,35 @@
 
 @font-face {
 	font-display: swap;
-	font-family: 'Outfit';
+	font-family: $baseFontFamily;
 	font-style: normal;
 	font-weight: 500;
 	src: url('../fonts/outfit-v11-latin-500.woff2') format('woff2');
 }
 
+
 [x-cloak] {
 	display: none !important;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
 }
 
 html,
 body {
 	height: 100vh;
-	font-family: 'Outfit';
-	font-weight: 300;
-	font-size: 16px;
+	font-family: $baseFontFamily;
+	font-weight: $baseFontWeight;
+	font-size: $baseFontSize;
 	line-height: 1.4;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	// place-content: center;
+	place-items: center;
 }

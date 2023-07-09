@@ -13,8 +13,8 @@
 	<link rel="preload" href="./fonts/outfit-v11-latin-300.woff2" as="font" fetchpriority="high" crossorigin />
 	<link rel="preload" href="./fonts/outfit-v11-latin-500.woff2" as="font" fetchpriority="high" crossorigin />
 
-	<link rel="stylesheet" href="./scss/app.scss" />
-	<script type="module" src="./js/app.js"></script>
+	<link rel="stylesheet" href="./scss/index.scss" />
+	<script type="module" src="./js/index.js"></script>
 </head>
 
 <body>
@@ -83,7 +83,8 @@
 				<button 
 					x-text="states.hasSubmitted ? 'Recreate' : 'Create'"
 					@click="submitPrompt"
-					:class="states.isSubmitting ? 'is-creating' : ''"
+					:class="states.isSubmitting ? 'is-submitting' : ''"
+					:disabled="!data.prompt.length"
 					class="prompt__controls__btn"
 					type="button"
 				></button>

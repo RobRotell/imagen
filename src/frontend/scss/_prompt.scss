@@ -1,0 +1,55 @@
+.prompt {
+	margin-top: pxToRem( 18 );
+	margin-bottom: pxToRem( 36 );
+
+	&__textarea {
+		width: 100%;
+		height: pxToRem( 120 );
+		padding: pxToRem( 12 ) pxToRem( 16 );
+		font-weight: 300;
+		font-size: pxToRem( 20 );
+		color: $textDark;
+		background-color: $textBgLight;
+		transition: background-color .175s linear;
+		border: none;
+		outline: none;
+		resize: none;
+
+		&::placeholder {
+			color: $textLight;
+		}
+
+		&:placeholder-shown {
+			background-color: $textBgDark;
+		}
+	}	
+
+	&__controls {
+		margin-top: pxToRem( 18 );
+		display: flex;
+		place-items: center;
+
+		&__btn {
+			width: 100%;
+			padding: pxToRem( 16 );
+			font-size: pxToRem( 18 );
+			color: #fff;
+			letter-spacing: 0.3rem;
+			text-transform: uppercase;
+			border: none;
+			background-color: $turquoise;
+			transition: background-color .175s linear;
+			cursor: pointer;
+
+			&:disabled {
+				background-color: $turquoiseGray;
+				pointer-events: none;
+			}
+
+			&:hover {
+				background-color: $turquoiseLight;
+			}
+		}
+	}
+
+}
