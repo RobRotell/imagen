@@ -15,7 +15,7 @@ const app = express()
 
 // app.engine( 'html', require( 'ejs' ).renderFile )
 app.use( express.json() )
-app.use( express.urlencoded({ extended: false }) )
+app.use( express.urlencoded({ extended: true }) )
 app.use( morgan( 'tiny' ) )
 app.use( express.static( path.join( appBasePath, 'public' ) ) )
 
