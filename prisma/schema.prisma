@@ -1,0 +1,19 @@
+generator client {
+	provider = "prisma-client-js"
+}
+
+datasource db {
+	provider = "mysql"
+	url      = env( "DB_URL" )
+}
+
+model Entries {
+	id		Int      	@id @unique @default( autoincrement() )
+	date	DateTime	@db.Date
+	prompt	String
+	mediaId	String
+	hashId	String
+}
+
+
+// npx prisma db push
