@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   fill="none"
+   version="1.1"
+   id="svg5965"
+   sodipodi:docname="polaroid-svgrepo-com.svg"
+   inkscape:export-filename="../5e7092a0/polaroid.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5969">
+    <linearGradient
+       id="linearGradient8151"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop8149" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="namedview5967"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false" />
+  <path
+     fill-rule="evenodd"
+     clip-rule="evenodd"
+     d="M 1.2,2.4 C 1.2,1.074516 2.274516,0 3.6,0 h 16.8 c 1.32552,0 2.4,1.074516 2.4,2.4 v 19.2 c 0,1.32552 -1.07448,2.4 -2.4,2.4 H 3.6 C 2.274516,24 1.2,22.92552 1.2,21.6 Z m 2.4,0 H 20.4 V 15.6 H 3.6 Z"
+     fill="#000000"
+     id="path5963"
+     style="fill:#420673;fill-opacity:1;stroke-width:1.2" />
+</svg>

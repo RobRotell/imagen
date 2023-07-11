@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>POL|A|RO|I|D</title>
+	<meta name="description" content="Create imaginative images through OpenAI." />
+
+	<!-- <link rel="icon" href="./img/favicon.svg" type="image/svg+xml" /> -->
+
+	<link rel="preload" href="./fonts/outfit-v11-latin-300.woff2" as="font" fetchpriority="high" crossorigin />
+	<link rel="preload" href="./fonts/outfit-v11-latin-500.woff2" as="font" fetchpriority="high" crossorigin />
+	<link rel="preload" href="./fonts/rock-salt-v18-latin-regular.woff2" as="font" fetchpriority="high" crossorigin />
+
+	<link rel="stylesheet" href="./scss/index.scss" />
+	<script type="module" src="./js/index.js"></script>
+</head>
+
+<body class="body">
+	<header class="header">
+		<a 
+			class="header__logo"
+			href="https://polaroid.robr.app"
+			title="Logo"
+		>
+		POL|A|RO|I|D
+		</a>
+	</header>
+
+	<main 
+		x-cloak
+		x-data="polaroid"
+		id="app"
+		class="app"
+	>
+		<div class="polaroid">
+			<div class="polaroid__frame">
+				<div 
+					x-text="data.error"
+					:class="{ 'is-visible': states.hasError }"
+					class="polaroid__frame__error"
+				></div>
+
+				<picture class="polaroid__picture">
+					<img 
+						x-ref="pictureImg"
+						:src="data.image.url"
+						:alt="data.image.alt"
+						:class="{ 'is-developing': states.isDeveloping, 'is-developed': states.isDeveloped }"
+						class="polaroid__picture__image"
+						width="900"
+						height="900"
+					/>				
+				</picture>
+			</div>
+
+			<div class="polaroid__prompt">
+				<textarea
+					x-model="data.prompt"
+					:placeholder="data.placeholderText"
+					class="polaroid__prompt__textarea"
+					maxlength="65"
+				></textarea>
+				<button 
+					@click="submitPrompt"
+					:class="{ 'is-submitting': states.isSubmitting, 'is-visible': states.canSubmit }"
+					:disabled="!data.prompt.length"
+					class="polaroid__prompt__btn"
+					type="button"
+				>
+					<i class="icon icon-camera">
+						<svg width="64" height="64" version="1.1" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-5.1915 -5.6568)"><g transform="matrix(.78756 0 0 .78756 25.551 4.7975)" fill="#fff"><path d="m-15.101 9.099c-2.0622 0-3.75 1.6878-3.75 3.75s1.6878 3.75 3.75 3.75 3.75-1.6878 3.75-3.75-1.6878-3.75-3.75-3.75zm0 1.5c1.2515 0 2.25 0.99848 2.25 2.25s-0.99848 2.25-2.25 2.25-2.25-0.99848-2.25-2.25 0.99848-2.25 2.25-2.25z" color="#000000" /><path d="m-16.734 2.099c-1.3348 0-2.5041 0.93314-2.7695 2.2363-0.0586 0.28767-0.33229 0.52539-0.61914 0.52539h-0.03321c-1.4274 0.062414-2.489 0.23915-3.3809 0.82422-0.56705 0.372-1.0555 0.84977-1.4355 1.4082-0.93117 1.3683-0.87891 3.0549-0.87891 6.1191a0.75 0.75 0 0 0 0.75 0.75 0.75 0.75 0 0 0 0.75-0.75c0-3.0642 0.05227-4.4424 0.61914-5.2754 0.26847-0.39449 0.61405-0.73333 1.0176-0.99805 0.54879-0.36003 1.2911-0.52175 2.625-0.58008l-0.0332 0.00195c1.0308 0 1.89-0.7456 2.0898-1.7266 0.12217-0.59975 0.6571-1.0352 1.2988-1.0352h3.2656c0.64166 0 1.1766 0.43536 1.2988 1.0352 0.1998 0.98092 1.059 1.7266 2.0898 1.7266l-0.0332-0.00195c1.3339 0.058326 2.0761 0.22 2.625 0.58008 0.40348 0.26474 0.74907 0.60355 1.0176 0.99805 0.56685 0.83295 0.61914 2.2112 0.61914 5.2754 0 3.0643-0.05229 4.4425-0.61914 5.2754-0.26852 0.39446-0.61407 0.73326-1.0176 0.99805-0.85408 0.5603-2.2695 0.61328-5.3906 0.61328h-4.4453c-3.121 0-4.5365-0.05299-5.3906-0.61328-0.40356-0.26477-0.7491-0.6036-1.0176-0.99805-0.16013-0.23532-0.27784-0.49494-0.36914-0.83398a0.75 0.75 0 0 0-0.91797-0.5293 0.75 0.75 0 0 0-0.5293 0.91992c0.12656 0.46995 0.31318 0.90063 0.57617 1.2871 0.38004 0.55835 0.86852 1.0381 1.4355 1.4102 1.3879 0.9105 3.0919 0.85742 6.2129 0.85742h4.4453c3.1211 0 4.825 0.05308 6.2129-0.85742 0.56689-0.37201 1.0555-0.85182 1.4355-1.4102 0.93115-1.3683 0.87891-3.0548 0.87891-6.1191 0-3.0642 0.052241-4.7509-0.87891-6.1191-0.38008-0.55842-0.86862-1.0362-1.4355-1.4082-0.89186-0.58502-1.9534-0.7618-3.3809-0.82422h-0.03321c-0.28693 0-0.56054-0.23767-0.61914-0.52539-0.26556-1.3031-1.4348-2.2363-2.7695-2.2363h-1.5977z" color="#000000" stroke-linecap="round" /><path d="m-9.1014 9.099a0.75 0.75 0 0 0-0.75 0.75 0.75 0.75 0 0 0 0.75 0.75h1a0.75 0.75 0 0 0 0.75-0.75 0.75 0.75 0 0 0-0.75-0.75z" color="#000000" stroke-linecap="round" /></g></g></svg>
+					</i>
+				</button>
+			</div>
+		</div>
+	</main>
+
+	<div id="floor" class="floor">
+		<canvas id="floor-matter" class="floor__matter"></canvas>
+	</div>
+
+</body>
+
+</html>

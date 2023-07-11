@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import { appBasePath } from '../constants/appBasePath'
+import { publicBasePath } from '../constants/paths'
 import { Auth } from '../controllers/Auth'
 import { ImageGenerator } from '../controllers/ImageGenerator'
 import { DbClient } from '../controllers/DbClient'
@@ -11,7 +11,7 @@ const router = express.Router()
 
 // general view
 router.get( '/', ( req, res ) => {
-	res.sendFile( path.join( appBasePath, '/public/app.html' ) )
+	res.sendFile( path.join( publicBasePath, 'index.html' ) )
 })
 
 
@@ -33,7 +33,7 @@ router.get( '/i/:id', async ( req, res ) => {
 
 		if ( match ) {
 			const { mediaId } = match
-			const imgFilePath = path.join( appBasePath, `public/media/${mediaId}.jpg` )
+			const imgFilePath = path.join( publicBasePath, `media/${mediaId}.jpg` )
 
 			return res.sendFile( imgFilePath )
 		}

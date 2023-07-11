@@ -3,7 +3,7 @@
 
 @font-face {
 	font-display: swap;
-	font-family: $baseFontFamily;
+	font-family: $fontOutfit;
 	font-style: normal;
 	font-weight: 300;
 	src: url('../fonts/outfit-v11-latin-300.woff2') format('woff2');
@@ -11,10 +11,18 @@
 
 @font-face {
 	font-display: swap;
-	font-family: $baseFontFamily;
+	font-family: $fontOutfit;
 	font-style: normal;
 	font-weight: 500;
 	src: url('../fonts/outfit-v11-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+	font-display: swap;
+	font-family: $fontRockSalt;
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/rock-salt-v18-latin-regular.woff2') format('woff2');
 }
 
 
@@ -31,13 +39,15 @@
 html,
 body {
 	height: 100vh;
-	font-family: $baseFontFamily;
-	font-weight: $baseFontWeight;
+	font-family: $fontOutfit;
+	font-weight: 300;
 	font-size: $baseFontSize;
 	line-height: 1.4;
+	background-color: $purpleDark;
 }
 
 body {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	// place-content: center;

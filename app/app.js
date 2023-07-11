@@ -3,11 +3,10 @@ import 'dotenv/config'
 
 import express from 'express'
 import morgan from 'morgan'
-import path from 'path'
 
 
 import routerIndex from './src/routes/index'
-import { appBasePath } from './src/constants/appBasePath'
+import { publicBasePath } from './src/constants/paths'
 
 
 const app = express()
@@ -17,7 +16,7 @@ const app = express()
 app.use( express.json() )
 app.use( express.urlencoded({ extended: true }) )
 app.use( morgan( 'tiny' ) )
-app.use( express.static( path.join( appBasePath, 'public' ) ) )
+app.use( express.static( publicBasePath ) )
 
 
 app.use( routerIndex )

@@ -1,7 +1,7 @@
 import * as fs from 'node:fs'
 import path from 'path'
 import sharp from 'sharp'
-import { appBasePath } from '../constants/appBasePath'
+import { publicBasePath } from '../constants/paths'
 import { downloadToFile } from '../utils/downloadToFile'
 import { hashValue } from '../utils/hashValue'
 import { DbClient } from '../controllers/DbClient'
@@ -48,8 +48,8 @@ export class RawImage {
 	 */
 	async saveAsLocalImage() {
 		const fileBaseName = hashValue( `${Date.now()} - ${this.prompt}` )
-		const filePathPng = path.join( appBasePath, `public/media/${fileBaseName}.png` )
-		const filePathJpg = path.join( appBasePath, `public/media/${fileBaseName}.jpg` )
+		const filePathPng = path.join( publicBasePath, `media/${fileBaseName}.png` )
+		const filePathJpg = path.join( publicBasePath, `media/${fileBaseName}.jpg` )
 
 		// download file from OpenAI
 		try {
