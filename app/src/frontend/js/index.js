@@ -1,14 +1,14 @@
 import Alpine from 'alpinejs'
-import Polaroid from './app'
-import { Floor } from './floor'
+import { Polaroid } from './Polaroid'
+import { Background } from './Background'
 
 
 // assigning to window to help browser extensions detect AlpineJS on page
 window.Alpine = Alpine
 
 
-Alpine.data( 'polaroid', Polaroid )
+Alpine.data( 'polaroid', () => Polaroid )
 Alpine.start()
 
 
-Floor.init()
+Background.load()

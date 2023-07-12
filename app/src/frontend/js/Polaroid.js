@@ -1,4 +1,4 @@
-export default () => ({
+export const Polaroid = {
 
 
 	states: {
@@ -13,7 +13,7 @@ export default () => ({
 
 
 	data: {
-		endpointUrl: 'http://localhost:3001',
+		endpointUrl: 'https://polaroid.robr.app',
 		placeholderText: '',
 		prompt: '',
 		image: {
@@ -30,7 +30,10 @@ export default () => ({
 	 * @return {void}
 	 */
 	init() {
-		this.generatePlaceholderText()
+		window.addEventListener( 'load', () => {
+			this.generatePlaceholderText()
+		})
+
 		this.watchPrompt()
 	},
 
@@ -173,27 +176,27 @@ export default () => ({
 			if ( strLen === placeholderString.length ) {
 				clearInterval( intervalTyping )
 
-				const intervalBlink = setInterval( () => {
-					const { placeholderText } = this.data
+				// const intervalBlink = setInterval( () => {
+				// 	const { placeholderText } = this.data
 
-					let noLeadingPipe = placeholderText.endsWith( ' |' )
+				// 	let noTrailingPipe = placeholderText.endsWith( ' |' )
 
-					// if user starts typing, clear interval
-					if ( this.data.prompt.length ) {
+				// 	// if user starts typing, clear interval
+				// 	if ( this.data.prompt.length ) {
 
-						// ensure no pipe in placeholder (in case user clears prompt)
-						noLeadingPipe = true
+				// 		// ensure no pipe in placeholder (in case user clears prompt)
+				// 		noTrailingPipe = true
 
-						clearInterval( intervalBlink )
-					}
+				// 		clearInterval( intervalBlink )
+				// 	}
 
-					if ( noLeadingPipe ) {
-						this.data.placeholderText = placeholderText.slice( 0, placeholderText.length - 2 )
-					} else {
-						this.data.placeholderText = `${placeholderText} |`
-					}
+				// 	if ( noTrailingPipe ) {
+				// 		this.data.placeholderText = placeholderText.slice( 0, placeholderText.length - 2 )
+				// 	} else {
+				// 		this.data.placeholderText = `${placeholderText} |`
+				// 	}
 
-				}, 625 )
+				// }, 625 )
 			}
 
 			strLen = strLenEnd
@@ -214,7 +217,7 @@ export default () => ({
 			'Create a photograph',
 			'Discover a spectacle',
 			'Forge a landscape',
-			'Generate a scenario',
+			'Generate a dream',
 			'Imagine a world',
 		]
 
@@ -224,4 +227,4 @@ export default () => ({
 	},
 
 
-})
+}

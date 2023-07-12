@@ -13,8 +13,8 @@ export class DbClient {
 	 * @return {void}
 	 */
 	static createClient() {
-		if ( null === this.client ) {
-			this.client = new PrismaClient()
+		if ( null === DbClient.client ) {
+			DbClient.client = new PrismaClient()
 		}
 	}
 
@@ -25,11 +25,11 @@ export class DbClient {
 	 * @return {Object} Prisma client
 	 */
 	static getClient() {
-		if ( null === this.client ) {
-			this.createClient()
+		if ( null === DbClient.client ) {
+			DbClient.createClient()
 		}
 
-		return this.client
+		return DbClient.client
 	}
 
 }
