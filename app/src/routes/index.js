@@ -50,7 +50,10 @@ router.get( '/i/:id', async ( req, res ) => {
 
 // create image
 router.post( '/', async ( req, res ) => {
-	const { auth, prompt } = req.body
+	let { auth, prompt } = req.body
+
+	auth = auth.trim()
+	prompt = prompt.trim()
 
 	const validAuth = Auth.validate( auth )
 
@@ -59,6 +62,15 @@ router.post( '/', async ( req, res ) => {
 			error: true,
 			data: {
 				error: 'Invalid auth code. Do I know you?',
+			},
+		})
+	}
+
+	if ( !prompt.length || 5 > prompt.length || 60 < prompt.length ) {
+		return res.status( 400 ).json({
+			error: true,
+			data: {
+				error: 'Prompt must be between 6 and 60 characters.',
 			},
 		})
 	}
