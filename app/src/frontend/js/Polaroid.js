@@ -16,7 +16,7 @@ export const Polaroid = {
 
 
 	data: {
-		endpointUrl: 'http://localhost:3001',
+		endpointUrl: 'https://polaroid.robr.app',
 		placeholderText: '',
 		placeholderInterval: null,
 		prompt: '',
