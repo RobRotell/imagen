@@ -1,3 +1,6 @@
+import tippy from 'tippy.js'
+
+
 export const Polaroid = {
 
 
@@ -13,8 +16,9 @@ export const Polaroid = {
 
 
 	data: {
-		endpointUrl: 'https://polaroid.robr.app',
+		endpointUrl: 'http://localhost:3001',
 		placeholderText: '',
+		placeholderInterval: null,
 		prompt: '',
 		image: {
 			url: '',
@@ -24,17 +28,26 @@ export const Polaroid = {
 	},
 
 
+	tooltips: {
+		btnCopy: null,
+	},
+
+
 	/**
 	 * Initiate the good stuff
 	 *
 	 * @return {void}
 	 */
 	init() {
-		window.addEventListener( 'load', () => {
-			this.generatePlaceholderText()
-		})
+		this.generatePlaceholderText()
 
 		this.watchPrompt()
+
+		this.tooltips.btnCopy = tippy( this.$refs.btnCopy, {
+			animation: 'scale-subtle',
+			content: 'Click to copy permalink',
+			placement: 'bottom',
+		})
 	},
 
 
@@ -60,6 +73,71 @@ export const Polaroid = {
 				this.data.error = ''
 
 			}, 250 )
+		})
+	},
+
+
+	/**
+	 * Handle when user focuses on "textarea"
+	 *
+	 * @return {void}
+	 */
+	handlePromptFocus() {
+		clearInterval( this.data.placeholderInterval )
+		this.data.placeholderText = ''
+	},
+
+
+	/**
+	 * Handle when user blurs/leaves "textarea"
+	 *
+	 * @return {void}
+	 */
+	handlePromptBlur() {
+		if ( !this.data.prompt.length ) {
+			this.generatePlaceholderText()
+		}
+	},
+
+
+	/**
+	 * Handle when user inputs text in "textarea"
+	 *
+	 * @return {void}
+	 */
+	handlePromptInput() {
+		let prompt = this.$refs.textarea.innerText.trim()
+
+		// if ( 60 < prompt.length ) {
+		// 	prompt = prompt.slice( 0, 60 )
+
+		// 	this.$refs.textarea.innerText = prompt
+		// }
+
+		this.data.prompt = prompt
+	},
+
+
+	/**
+	 * Copy link to user clipboard
+	 *
+	 * @return {void}
+	 */
+	handleCopyBtnClick() {
+		import( 'copy-to-clipboard' ).then( copy => {
+			copy( this.data.image.permalink )
+
+			this.tooltips.btnCopy.setContent( 'Copied!' )
+			this.tooltips.btnCopy.show()
+
+			setTimeout( () => {
+				this.tooltips.btnCopy.hide()
+
+				// reset text
+				setTimeout( () => {
+					this.tooltips.btnCopy.setContent( 'Click to copy permalink' )
+				}, 1000 )
+			}, 2500 )
 		})
 	},
 
@@ -151,6 +229,8 @@ export const Polaroid = {
 		this.data.image.url = url
 		this.data.image.permalink = permalink
 
+		this.states.imageVisible = true
+
 		setTimeout( () => {
 			this.states.isDeveloped = true
 		}, 300 )
@@ -167,14 +247,16 @@ export const Polaroid = {
 
 		let strLen = 0
 
-		const intervalTyping = setInterval( () => {
+		this.data.placeholderInterval = setInterval( () => {
 			const strLenEnd = strLen + 1
 
 			this.data.placeholderText += placeholderString.slice( strLen, strLenEnd )
 
 			// clear interval once string has been typed out
 			if ( strLen === placeholderString.length ) {
-				clearInterval( intervalTyping )
+				clearInterval( this.data.placeholderInterval )
+
+				// this.$refs.textarea.focus()
 
 				// const intervalBlink = setInterval( () => {
 				// 	const { placeholderText } = this.data
@@ -201,7 +283,7 @@ export const Polaroid = {
 
 			strLen = strLenEnd
 
-		}, 45 )
+		}, 25 )
 	},
 
 

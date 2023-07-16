@@ -1,0 +1,14 @@
+.header {
+	display: flex;
+	place-content: center;
+	place-items: center;
+	width: 100%;
+	margin-bottom: pxToRem( 24 );
+	padding: pxToRem( 48 ) pxToRem( 32 ) pxToRem( 24 );
+	z-index: 1000;
+
+	&__logo {
+		display: block;
+	}
+
+}

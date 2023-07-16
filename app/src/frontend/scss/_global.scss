@@ -1,4 +1,7 @@
 @import 'npm:normalize.css/normalize.css';
+@import 'npm:tippy.js/dist/tippy.css';
+// @import 'npm:tippy.js/animations/scale.css';
+@import 'npm:tippy.js/animations/scale-subtle.css';
 
 
 @font-face {
@@ -43,7 +46,7 @@ body {
 	font-weight: 300;
 	font-size: $baseFontSize;
 	line-height: 1.4;
-	background-color: $blueDark;
+	background-color: #242433;
 }
 
 body {

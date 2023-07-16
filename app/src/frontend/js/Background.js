@@ -1,132 +1,122 @@
+import { Utils } from './Utils'
+import Matter from 'matter-js'
+
+
 export class Background {
 
 
-	static config = {
-		particles: {
-			number: {
-				value: 10,
-				density: {
-					enable: true,
-					value_area: 600,
-				},
-			},
-			color: {
-				value: '#04044d',
-			},
-			shape: {
-				type: 'image',
-				stroke: {
-					width: 0,
-					color: '#000',
-				},
-				// polygon: {
-				// nb_sides: 4,
-				// },
-				image: {
-					// eslint-disable-next-line global-require
-					src: require( '../img/polaroid.svg' ),
-					width: 100,
-					height: 100,
-				},
-			},
-			opacity: {
-				value: 0.1,
-				random: true,
-				anim: {
-					enable: false,
-					speed: 1,
-					opacity_min: 0.1,
-					sync: false,
-				},
-			},
-			size: {
-				value: 160,
-				random: true,
-				anim: {
-					enable: true,
-					speed: 10,
-					size_min: 40,
-					sync: false,
-				},
-			},
-			line_linked: {
-				enable: false,
-				distance: 200,
-				color: '#ffffff',
-				opacity: 1,
-				width: 2,
-			},
-			move: {
-				enable: true,
-				speed: 1.3,
-				direction: 'none',
-				random: true,
-				straight: false,
-				out_mode: 'out',
-				bounce: false,
-				attract: {
-					enable: false,
-					rotateX: 600,
-					rotateY: 1200,
-				},
-			},
-		},
-		interactivity: {
-			detect_on: 'canvas',
-			events: {
-				onhover: {
-					enable: false,
-					mode: 'repulse',
-				},
-				onclick: {
-					enable: false,
-					mode: 'push',
-				},
-				resize: true,
-			},
-			modes: {
-				grab: {
-					distance: 400,
-					line_linked: {
-						opacity: 1,
-					},
-				},
-				bubble: {
-					distance: 400,
-					size: 40,
-					duration: 2,
-					opacity: 8,
-					speed: 3,
-				},
-				repulse: {
-					distance: 200,
-					duration: 0.4,
-				},
-				push: {
-					particles_nb: 4,
-				},
-				remove: {
-					particles_nb: 2,
-				},
-			},
-		},
-		retina_detect: true,
-	}
+	static canvas = null
+
+	static container = null
+
+	static engine = null
+
+	static render = null
+
+	static runner = null
+
+	static polaroids = []
 
 
 	/**
-	 * Load ParticlesJS for background
+	 * Kicks off class
 	 *
 	 * @return {void}
 	 */
 	static load() {
+		Background.canvas = document.querySelector( '.background__canvas' )
+		Background.container = document.querySelector( '.background' )
 
-		// ParticlesJS library with be bound to window
-		import( 'particles.js' ).then( () => {
-			window.particlesJS( 'background', Background.config, () => {
-				console.log( 'here' )
-			})
+		window.requestAnimationFrame( Background.start )
+	}
+
+
+	/**
+	 * "Actually" kicks off class
+	 *
+	 * @return {void}
+	 */
+	static start() {
+		Background.engine = Matter.Engine.create()
+		Background.engine.gravity.x = 0
+		Background.engine.gravity.y = 0
+
+		Background.render = Matter.Render.create({
+			canvas: Background.canvas,
+			element: Background.container,
+			engine: Background.engine,
+			options: {
+				showSleeping: true,
+				background: '#030333',
+				hasBounds: true,
+				height: window.innerHeight,
+				width: window.innerWidth,
+				wireframes: false,
+			},
+		})
+
+		Background.runner = Matter.Runner.create()
+
+		Background.generatePolaroids()
+		Background.renderWorld()
+	}
+
+
+	/**
+	 * Generate polaroid images
+	 *
+	 * @return {void}
+	 */
+	static generatePolaroids() {
+		const count = 0.2 * window.innerWidth
+
+		for ( let i = 0; count >= i; ++i ) {
+			Background.polaroids.push( Background.createPolaroid() )
+			Background.polaroids = Utils.shuffleArray( Background.polaroids )
+		}
+	}
+
+
+	/**
+	 * Generate MatterJS body for individual polaroids
+	 *
+	 * @return {Object}
+	 */
+	static createPolaroid() {
+		const posX = Utils.generateRandomInt( 50, window.innerWidth - 50 )
+		const posY = Utils.generateRandomInt( 50, window.innerHeight - 50 )
+		const angle = Utils.generateRandomInt( 0, 360 )
+
+		// @see https://github.com/parcel-bundler/parcel/issues/3056#issuecomment-493745825
+		// eslint-disable-next-line global-require
+		const svgImgUrl = require( '../img/polaroid.svg' )
+
+		return Matter.Bodies.circle( posX, posY, 24, {
+			angle,
+			density: 5e-6,
+			frictionAir: 0,
+			restitution: 1,
+			friction: 0.01,
+			mass: 0,
+			render: {
+				sprite: {
+					texture: svgImgUrl,
+				},
+			},
 		})
 	}
+
+
+	/**
+	 * Renders background through MatterJS
+	 *
+	 * @return {void}
+	 */
+	static renderWorld() {
+		Matter.Composite.add( Background.engine.world, Background.polaroids )
+		Matter.Render.run( Background.render )
+		Matter.Runner.run( Background.runner, Background.engine )
+	}
+
 
 }

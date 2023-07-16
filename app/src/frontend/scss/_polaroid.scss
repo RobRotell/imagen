@@ -13,8 +13,48 @@
 		padding: pxToRem( 64 );
 	}
 
+	&__tape {
+		position: absolute;
+		opacity: 0.85;
+		z-index: 2000;
+		width: pxToRem( 70 );
+		
+		@media ( width >= 1200px ) {
+			width: pxToRem( 250 );
+			height: pxToRem( 150 );
+		}
+
+		& svg {
+			width: 100%;
+			height: 100%;
+		}
+		
+		&--top {
+			top: pxToRem( -5 );
+			right: pxToRem( -20 );
+			transform: rotate( 20deg);
+			
+			@media ( width >= 1200px ) {
+				top: pxToRem( -19 );
+				right: pxToRem( -50 );
+			}
+		}
+
+		&--bottom {
+			left: pxToRem( -20 );
+			bottom: pxToRem( -10 );
+			transform: rotate( 35deg);
+			
+			@media ( width >= 1200px ) {
+				left: pxToRem( -80 );
+				bottom: pxToRem( -25 );
+			}			
+		}
+	}
+
 
 	&__frame {
+		$frame: &;
 		position: relative;
 		background: rgb(48,48,48);
 		background: radial-gradient(circle, rgba(48,48,48,1) 10%, rgba(30,30,30,1) 48%, rgba(5,5,5,1) 90%);
@@ -37,12 +77,69 @@
 			transition: 0.175s linear;
 			opacity: 0;
 			visibility: hidden;
+			z-index: 1000;
 
 			&.is-visible {
 				opacity: 1;
 				visibility: visible;
 			}
 		}
+
+
+		&__copy {
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: pxToRem( 100 );
+			height: pxToRem( 100 );
+			transform: translate( -50%, -50% );
+			background-color: $greenLight;
+			box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+			border: none;
+			border-radius: 50%;
+			cursor: pointer;
+			visibility: hidden;
+			opacity: 0;
+			transition: 0.175s linear;
+			will-change: visibility, opacity;
+			z-index: 1000;
+
+			#{$frame}.has-image:hover & {
+				visibility: visible;
+				opacity: 1;
+			}
+
+			&:hover {
+				background-color: $green;
+
+				.icon {
+					transform: scale( 1.15 );
+				}
+			}
+
+			&:active {
+				background-color: $greenDark;
+			}			
+
+			& .icon {
+				width: pxToRem( 40 );
+				height: pxToRem( 40 );
+				will-change: transform;
+				transition: 0.075s linear;
+			}
+
+			@media( width >= 1200px ) {
+				width: pxToRem( 160 );
+				height: pxToRem( 160 );
+
+				& .icon {
+					width: pxToRem( 60 );
+					height: pxToRem( 60 );					
+				}
+			}
+		}
+
 
 	}
 
@@ -72,10 +169,14 @@
 		padding: pxToRem( 24 );
 
 		&__textarea {
+			display: flex;
+			place-content: center;
+			place-items: center;
 			width: 100%;
 			height: pxToRem( 124 );
 			font-family: $fontRockSalt;
 			font-size: pxToRem( 24 );
+			color: $textLight;
 			line-height: 1.4;
 			text-align: center;
 			background: transparent;
@@ -83,6 +184,11 @@
 			outline: none;
 			transform: rotateZ( -2deg );
 			resize: none;
+			// word-break: break-all;
+
+			&.has-input {
+				color: $textUltraDark;
+			}
 
 			@media( width >= 1200px ) {
 				font-size: pxToRem( 48 );
@@ -138,8 +244,8 @@
 				display: block;
 				width: pxToRem( 38 );
 				height: pxToRem( 38 );
-				transition: transform 0.075s linear;
-				will-change: transform;
+				transition: 0.075s linear;
+				will-change: transform, opacity;
 
 				@media( width >= 1200px ) {
 					width: pxToRem( 72 );
@@ -151,7 +257,50 @@
 					height: 100%;
 				}
 			}
+
+			&.is-submitting {
+				cursor: not-allowed;
+				pointer-events: none;
+
+				.icon {
+					opacity: 0;
+				}
+
+				&:before,
+				&:after {
+					content: '';
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					display: block;
+					width: pxToRem( 36 );
+					height: pxToRem( 36 );
+					transform: translate( -50%, -50% );
+					border: pxToRem( 3 ) solid;
+					border-radius: 50%;
+					border-color: #fff transparent;
+					transition: 1s linear;
+				}
+
+				&:before {
+					animation: simpleSpin 1s linear infinite 0.5s;
+				}
+
+				&:after {
+					animation: simpleSpin 1s linear infinite 0.5s;
+				}
+			}
 		}
 	}
+}
 
+
+@keyframes simpleSpin {
+	0% {
+		transform: translate( -50%, -50% ) rotateZ( 0 );
+	}
+
+	100% {
+		transform: translate( -50%, -50% ) rotateZ( 360deg );
+	}	
 }

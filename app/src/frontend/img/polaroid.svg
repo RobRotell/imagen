@@ -6,8 +6,31 @@
    fill="none"
    version="1.1"
    id="svg5965"
+   sodipodi:docname="polaroid.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview23"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="6.1478892"
+     inkscape:cx="31.96219"
+     inkscape:cy="42.046952"
+     inkscape:window-width="3778"
+     inkscape:window-height="2096"
+     inkscape:window-x="3902"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5965" />
   <defs
      id="defs5969">
     <linearGradient
@@ -24,5 +47,5 @@
      d="M 3.2,6.4 C 3.2,2.865376 6.065376,0 9.6,0 h 44.8 c 3.53472,0 6.4,2.865376 6.4,6.4 v 51.2 c 0,3.53472 -2.86528,6.4 -6.4,6.4 H 9.6 C 6.065376,64 3.2,61.13472 3.2,57.6 Z m 6.4,0 H 54.4 V 41.6 H 9.6 Z"
      fill="#000000"
      id="path5963"
-     style="fill:#04044d;fill-opacity:1;stroke-width:3.2" />
+     style="fill:#040440;fill-opacity:1;stroke-width:3.2" />
 </svg>
