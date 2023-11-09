@@ -1,11 +1,11 @@
 import * as fs from 'node:fs'
 import path from 'path'
 import sharp from 'sharp'
-import { publicBasePath } from '../constants/paths'
-import { downloadToFile } from '../utils/downloadToFile'
-import { hashValue } from '../utils/hashValue'
-import { DbClient } from '../controllers/DbClient'
-import { LocalImage } from './LocalImage'
+import { publicBasePath } from '../constants/paths.js'
+import { downloadToFile } from '../utils/downloadToFile.js'
+import { hashValue } from '../utils/hashValue.js'
+import { DbClient } from '../controllers/DbClient.js'
+import { LocalImage } from './LocalImage.js'
 
 
 export class RawImage {

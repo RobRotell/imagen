@@ -1,9 +1,10 @@
 {
 	"name": "polaroid",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "SPA for generating images through OpenAI",
 	"scripts": {
 		"server:dev": "NODE_OPTIONS='--experimental-specifier-resolution=node' nodemon ./bin/www.js",
+		"server:start": "pm2 start ./bin/www.js --name=polaroid",
 		"parcel:build": "parcel build src/frontend/index.html",
 		"parcel:dev": "parcel src/frontend/index.html --port 59049 --hmr-port 59049"
 	},
@@ -18,22 +19,6 @@
 		"url": "https://github.com/RobRotell/polaroid/issues"
 	},
 	"homepage": "https://github.com/RobRotell/polaroid#readme",
-	"source": "src/frontend/index.html",
-	"targets": {
-		"default": {
-			"distDir": "../public",
-			"outputFormat": "global",
-			"context": "browser"
-		},
-		"frontend-js": {
-			"source": "./src/frontend/js/index.js",
-			"distDir": "../public/dist"
-		},
-		"frontend-css": {
-			"source": "./src/frontend/scss/index.scss",
-			"distDir": "../public/dist"
-		}
-	},
 	"dependencies": {
 		"@prisma/client": "^4.16.2",
 		"alpinejs": "^3.12.3",
@@ -49,7 +34,7 @@
 		"morgan": "^1.10.0",
 		"multer": "^1.4.5-lts.1",
 		"normalize.css": "^8.0.1",
-		"openai": "^3.3.0",
+		"openai": "^4.17.0",
 		"sharp": "^0.32.1",
 		"tippy.js": "^6.3.7",
 		"tsparticles-engine": "^2.11.0"
@@ -59,7 +44,7 @@
 		"eslint": "^8.44.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.27.5",
-		"nodemon": "^3.0.0",
+		"nodemon": "^3.0.1",
 		"parcel": "^2.9.3"
 	}
 }

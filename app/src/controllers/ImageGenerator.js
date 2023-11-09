@@ -1,5 +1,5 @@
-import { OpenAi } from '../connectors/OpenAi'
-import { RawImage } from '../models/RawImage'
+import { OpenAi } from '../connectors/OpenAi.js'
+import { RawImage } from '../models/RawImage.js'
 
 
 export class ImageGenerator {
@@ -33,6 +33,8 @@ export class ImageGenerator {
 		try {
 			// OpenAI will return an Azure URL
 			const imageUrl = await OpenAi.generateImage( prompt )
+
+			console.log( imageUrl )
 
 			// handles downloading and saving image as JPEG and creating DB entry
 			const rawImage = new RawImage( imageUrl, prompt )

@@ -5,8 +5,8 @@ import express from 'express'
 import morgan from 'morgan'
 
 
-import routerIndex from './src/routes/index'
-import { publicBasePath } from './src/constants/paths'
+import routerIndex from './src/routes/index.js'
+import { publicBasePath } from './src/constants/paths.js'
 
 
 const app = express()

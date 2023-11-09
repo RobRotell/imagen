@@ -3,7 +3,7 @@
 
 import http from 'http'
 import { log } from 'console'
-import { app } from '../app'
+import { app } from '../app.js'
 
 
 // get port and set in Express

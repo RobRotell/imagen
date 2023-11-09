@@ -1,11 +1,11 @@
 import express from 'express'
 import path from 'path'
-import { publicBasePath } from '../constants/paths'
-import { Auth } from '../controllers/Auth'
-import { ImageGenerator } from '../controllers/ImageGenerator'
-import { DbClient } from '../controllers/DbClient'
 import { check } from 'express-validator'
 import { existsSync } from 'fs'
+import { publicBasePath } from '../constants/paths.js'
+import { Auth } from '../controllers/Auth.js'
+import { ImageGenerator } from '../controllers/ImageGenerator.js'
+import { DbClient } from '../controllers/DbClient.js'
 
 
 const router = express.Router()
@@ -86,11 +86,11 @@ router.post(
 			})
 		}
 
-		if ( !prompt.length || 5 > prompt.length || 60 < prompt.length ) {
+		if ( !prompt.length || 5 > prompt.length || 120 < prompt.length ) {
 			return res.status( 400 ).json({
 				error: true,
 				data: {
-					error: 'Prompt must be between 6 and 60 characters.',
+					error: 'Prompt must be between 6 and 120 characters.',
 				},
 			})
 		}

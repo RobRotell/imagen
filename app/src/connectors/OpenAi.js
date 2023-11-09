@@ -1,11 +1,9 @@
-import { Configuration, OpenAIApi } from 'openai'
+import OpenAI from 'openai'
 
 
-const openAiConfig = new Configuration({
+const client = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
 })
-
-const openAiClient = new OpenAIApi( openAiConfig )
 
 
 export class OpenAi {
@@ -18,13 +16,13 @@ export class OpenAi {
 	 * @return {bool} true, if fails moderation; otherwise, false
 	 */
 	static async failsModeration( prompt ) {
-		const res = await openAiClient.createModeration({
+		const res = await client.moderations.create({
 			input: prompt,
 		})
 
 		// results will be an array of results
 		// eslint-disable-next-line no-unsafe-optional-chaining
-		const { results } = res?.data
+		const { results } = res
 
 		if ( Array.isArray( results ) ) {
 			return results[0]?.flagged
@@ -47,13 +45,16 @@ export class OpenAi {
 		let url = ''
 
 		try {
-			const res = await openAiClient.createImage({
-				prompt,
+			const res = await client.images.generate({
+				model: 'dall-e-3',
+				quality: 'hd',
+				style: 'vivid',
 				user: process.env.OPENAI_API_USER,
+				prompt,
 			})
 
 			// data is wrapped in an Axios response
-			url = res.data?.data[0]?.url
+			url = res.data[0]?.url
 
 		} catch ( err ) {
 			// console.warn( err )
