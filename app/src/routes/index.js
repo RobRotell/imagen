@@ -86,11 +86,11 @@ router.post(
 			})
 		}
 
-		if ( !prompt.length || 5 > prompt.length || 120 < prompt.length ) {
+		if ( !prompt.length || 5 > prompt.length || 1000 < prompt.length ) {
 			return res.status( 400 ).json({
 				error: true,
 				data: {
-					error: 'Prompt must be between 6 and 120 characters.',
+					error: 'Prompt must be between 6 and 1000 characters.',
 				},
 			})
 		}

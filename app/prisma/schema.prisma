@@ -10,7 +10,7 @@ datasource db {
 model Entries {
 	id		Int      	@id @unique @default( autoincrement() )
 	date	DateTime	@db.Date
-	prompt	String
+	prompt	String 		@db.VarChar( 1000 )
 	mediaId	String
 	hashId	String
 }
